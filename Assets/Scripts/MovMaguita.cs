@@ -1,37 +1,90 @@
-using UnityEngine;
+    using UnityEngine;
+    using UnityEngine.InputSystem;
 
 public class MovMaguita : MonoBehaviour
+
+
 {
+    
+    public float velocidad = 0.01f;
+    public float impulsoSalto = 1.0f;
 
-    int miNumero = 1;
+    public GameObject senyal;
 
-    float miNumeroFlotante = 0.8f;
+    Vector3 inicioPersonaje = new Vector3(1,1,0);
 
-    string miCadenaDetexto = "Hola esto es una cadena de texto";
-
-    bool esEstrella = true;
+    Rigidbody2D rb;
+     
+    bool  puedoSaltar = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        float sumaEntreDecenas = Sumar (10,20,3.8f);
-        Debug.Log("inicio");
-        Debug.Log (sumaEntreDecenas);
+
+        this.transform.position = inicioPersonaje;
+
+        Debug.Log(this.transform.position);
+
+        rb = GetComponent<Rigidbody2D>();   
+
+        senyal = GameObject.Find("barril");
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Hola");
+         Vector2 moveInput = InputSystem.actions["Move"].ReadValue<Vector2>();
+
+        this.transform.Translate(moveInput.x*velocidad,moveInput.y*velocidad,0);
+
+        //moveInput.x = (-1:A) ==== ==== (1:D)
+        if(moveInput.x < 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+         else if(moveInput.x > 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position,Vector2.down,0.5f);
+        Debug.DrawRay(transform.position,Vector2.down*0.5f,Color.red);
+
+        if(hit.collider == true)
+        { 
+            puedoSaltar = true; 
+            this.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+         else 
+        { 
+            puedoSaltar = false;
+            this.GetComponent<SpriteRenderer>().color = Color.red;   
+        }
+
+
+        //SALTO
+
+        bool salto = InputSystem.actions["Jump"].WasPressedThisFrame();
+        if(salto == true && puedoSaltar == true)
+        {
+        rb.AddForce(transform.up*impulsoSalto,ForceMode2D.Impulse);  
+        }
+    
+
+
+    //DISPARO
+    bool disparo = InputSystem.actions["Attack"].WasPressedThisFrame();
+
+    if (disparo)
+{
+Instantiate(senyal, new Vector3(0,0,0), Quaternion.identity);
+
+}
+
+
+
     }
-
-    float Sumar(int Num1, int Num2, float Num3)
-    {
-        float suma = Num1 + Num2 + Num3;
-        return suma;
-    }
-
-
-
 
 }
