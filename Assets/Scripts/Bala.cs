@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 public class Bala : MonoBehaviour
 {
 
+GameObject Maguita;
+
+bool direccionMaguita;
+public float velocidadBala = 0.5f;
 public GameObject disparo;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,16 +21,18 @@ public GameObject disparo;
     {
         transform.Rotate(0,0,0.5f);
 
-        bool direccionMaguita = MovMaguita.GetComponent<MovMaguita>().direccionBalaDerecha;
+        bool direccionMaguita = Maguita.GetComponent<MovMaguita>().direccionBalaDerecha;
         
         if(direccionMaguita)
         {
-            disparo.transform.Translate(0.01f,0,0);
+            disparo.transform.Translate(velocidadBala,0,0);
+            transform.Rotate(0,0,0.5f);
         }
 
         else
         {
-            disparo.transform.Translate(-0.01f,0,0);
+            disparo.transform.Translate(velocidadBala*-1,0,0);
+            transform.Rotate(0,0,-0.5f);
         }
        
     }

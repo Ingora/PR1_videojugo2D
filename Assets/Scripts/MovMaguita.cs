@@ -20,7 +20,6 @@ public class MovMaguita : MonoBehaviour
     void Start()
     {
 
-
         rb = GetComponent<Rigidbody2D>();  
 
         controlAnimacion = GetComponent<Animator>(); 
@@ -36,10 +35,10 @@ public class MovMaguita : MonoBehaviour
     void Update()
     {
 
-        Debug.Log("Vidas: " + vidas);
-        Debug.Log("Puntos: " + puntos);
+        Debug.Log("Vidas: " + GameManager.vidas);
+        Debug.Log("Puntos: " + GameManager.puntos);
 
-         Vector2 moveInput = InputSystem.actions["Move"].ReadValue<Vector2>();
+        Vector2 moveInput = InputSystem.actions["Move"].ReadValue<Vector2>();
 
         this.transform.Translate(moveInput.x*velocidad,moveInput.y*velocidad,0);
 
@@ -61,11 +60,11 @@ public class MovMaguita : MonoBehaviour
 
        if(moveInput.x != 0)
        {
-        Magocontroler.SetBool("activaCamina",true);
+        controlAnimacion.SetBool("activaCamina",true);
        }
        else
        {
-        Magocontroler.SetBool("activaCamina",false);
+        controlAnimacion.SetBool("activaCamina",false);
        }
 
 
@@ -90,6 +89,11 @@ public class MovMaguita : MonoBehaviour
         {
         rb.AddForce(transform.up*impulsoSalto,ForceMode2D.Impulse);  
         }
+
+        if(transform.position.y <= -10)
+        {
+            Muerte();
+        }
     
     }
     void OnTriggerEnter2D(Collider2D col)
@@ -99,9 +103,8 @@ public class MovMaguita : MonoBehaviour
 //Dead
         if(col.gameObject.name == "dead")
         {
-            GameManager.vidas -= 1;
-            Debug.Log("Vidas restantes: " + GameManager.vidas);
-            transform.position = respawn.transform.position;
+            Muerte();
+         
         }
 
         //Checkpoint
@@ -109,6 +112,13 @@ public class MovMaguita : MonoBehaviour
         {
             respawn.transform.position = col.transform.position;
         }
+
+    }
+
+    public void Muerte()
+    {
+           GameManager.vidas -= 1;
+            transform.position = respawn.transform.position;
 
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class CoinScript : MonoBehaviour
 {
     public int valor = 10;
@@ -20,7 +21,7 @@ public class CoinScript : MonoBehaviour
        Debug.Log(col);
         if(col.gameObject.name == "Maguita")
         {
-            MovMaguita.puntos += 10;
+            GameManager.puntos += 10;
             gameObject.GetComponent<Animator>().SetBool("obtenerCoin",true);
             Destroy(this.gameObject, 3.0f);
         }

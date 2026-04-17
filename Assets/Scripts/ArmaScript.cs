@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ArmaScript : MonoBehaviour
 {
+    public GameObject Bala;
        void Start()
     {
         
