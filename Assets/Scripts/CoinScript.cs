@@ -23,7 +23,7 @@ public class CoinScript : MonoBehaviour
         {
             GameManager.puntos += 10;
             gameObject.GetComponent<Animator>().SetBool("obtenerCoin",true);
-            Destroy(this.gameObject, 3.0f);
+            Destroy(this.gameObject, 2.0f);
         }
     }
 }

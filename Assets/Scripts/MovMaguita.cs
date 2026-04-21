@@ -13,7 +13,7 @@ public class MovMaguita : MonoBehaviour
     Animator controlAnimacion; 
     bool  puedoSaltar = false;
     GameObject respawn;
-
+    public string direccionMaguita = "quito";
     public bool direccionBalaDerecha = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,6 +38,7 @@ public class MovMaguita : MonoBehaviour
         Debug.Log("Vidas: " + GameManager.vidas);
         Debug.Log("Puntos: " + GameManager.puntos);
 
+//MOVIMIENTO
         Vector2 moveInput = InputSystem.actions["Move"].ReadValue<Vector2>();
 
         this.transform.Translate(moveInput.x*velocidad,moveInput.y*velocidad,0);
@@ -46,11 +47,15 @@ public class MovMaguita : MonoBehaviour
         if(moveInput.x < 0)
         {
             this.GetComponent<SpriteRenderer>().flipX = true;
+            direccionBalaDerecha = false;
+            direccionMaguita = "izq";
         }
 
          else if(moveInput.x > 0)
         {
+            direccionBalaDerecha = true;
             this.GetComponent<SpriteRenderer>().flipX = false;
+            direccionMaguita = "drcha";
         }
 
        //Animacion caminado

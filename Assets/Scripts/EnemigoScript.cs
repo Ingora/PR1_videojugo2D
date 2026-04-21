@@ -29,6 +29,8 @@ public class EnemigoScript : MonoBehaviour
         posicionInicial = transform.position; 
         posicionlimitIzq = new Vector3(posicionInicial.x - distanciaPatrulla,posicionInicial.y,posicionInicial.z);
         posicionlimitDcha = new Vector3(posicionInicial.x + distanciaPatrulla,posicionInicial.y,posicionInicial.z);
+
+        
     }
 
     // Update is called once per frame
@@ -36,6 +38,9 @@ public class EnemigoScript : MonoBehaviour
     {
        float distancia = Vector3.Distance(transform.position, Maguita.transform.position);
         
+
+        Debug.DrawRay(transform.position,Maguita.transform.position);
+
         //Detección
 
     if(distancia <= distanciaAtaque)
@@ -79,6 +84,7 @@ public class EnemigoScript : MonoBehaviour
             }
 
         }
+            //ATAQUE
 
     if (estado == "ataque")
         {
