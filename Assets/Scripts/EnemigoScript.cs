@@ -89,8 +89,11 @@ public class EnemigoScript : MonoBehaviour
     if (estado == "ataque")
         {
          
-          transform.position = Vector3.MoveTowards(transform.position, Maguita.transform.position, velocidadAtaque);
-        }
+        transform.position = Vector3.MoveTowards(transform.position, Maguita.transform.position, velocidadAtaque);
+       if(AudioManager.Instance._audioSource.isPlaying == false)
+       {
+        AudioManager.Instance.SonarClipUnaVez(AudioManager.Instance.fantasmas);       
+       }
 
     }
 
@@ -110,4 +113,5 @@ if(col.gameObject.name == "Bala")
     Destroy(col.gameObject, 0.5f);   
 }
 }
+    }
 }

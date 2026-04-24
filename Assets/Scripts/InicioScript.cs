@@ -5,6 +5,7 @@ public class InicioScript : MonoBehaviour
 {
     public GameObject panelInicio;
     public GameObject panelSettings;
+    public AudioManager AudioManagerObj;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,31 +14,31 @@ public class InicioScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-}
+    void Update() { }
 
-public void showSettings()
+    public void showSettings()
     {
         panelSettings.SetActive(true);
         panelInicio.SetActive(false);
+        AudioManagerObj.GetComponent<AudioManager>().SonarBoton();
     }
 
     public void exitSettings()
     {
         panelSettings.SetActive(false);
         panelInicio.SetActive(true);
+        AudioManagerObj.GetComponent<AudioManager>().SonarBoton();
     }
 
-public void Inicio()
+    public void Inicio()
     {
-        
-         SceneManager.LoadScene("juego");
+        SceneManager.LoadScene("juego");
+        AudioManagerObj.GetComponent<AudioManager>().SonarBoton();
     }
-       
-       public void ExitGame()
+
+    public void ExitGame()
     {
         Application.Quit();
+        AudioManagerObj.GetComponent<AudioManager>().SonarBoton();
     }
 }
