@@ -31,8 +31,8 @@ public class MovMaguita : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Vidas: " + GameManager.vidas);
-        Debug.Log("Puntos: " + GameManager.puntos);
+        //Debug.Log("Vidas: " + GameManager.vidas);
+        //Debug.Log("Puntos: " + GameManager.puntos);
 
         //MOVIMIENTO
         Vector2 moveInput = InputSystem.actions["Move"].ReadValue<Vector2>();
@@ -97,7 +97,7 @@ public class MovMaguita : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Trigger con" + col.gameObject.name);
+        //Debug.Log("Trigger con" + col.gameObject.name);
 
         //Dead
         if (col.gameObject.name == "dead")
