@@ -60,11 +60,11 @@ public class MovMaguita : MonoBehaviour
 
         if (moveInput.x != 0)
         {
-            controlAnimacion.SetBool("activaCamina", true);
+            controlAnimacion.SetBool("isMoving", true);
         }
         else
         {
-            controlAnimacion.SetBool("activaCamina", false);
+            controlAnimacion.SetBool("isMoving", false);
         }
 
         //SALTO
